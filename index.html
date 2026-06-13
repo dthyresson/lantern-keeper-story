@@ -3,7 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Lantern Keeper — Story & Storyboard</title>
+<title>The Lantern Keeper — A Bedtime Story</title>
+<meta name="description" content="A bedtime story about a boy, a lighthouse, and the light that never goes out. Read the full story, explore the storyboard, and discover the visual themes.">
+<meta property="og:title" content="The Lantern Keeper">
+<meta property="og:description" content="A bedtime story about a boy, a lighthouse, and the light that never goes out.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0b111e">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
 <style>
   /* ── reset ── */
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -32,18 +39,36 @@
 
   /* ── hero ── */
   .hero {
-    min-height: 70vh;
+    min-height: 80vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
     text-align: center;
     background:
-      radial-gradient(ellipse at 50% 0%, rgba(217,119,6,0.12) 0%, transparent 60%),
-      radial-gradient(ellipse at 80% 100%, rgba(37,99,235,0.08) 0%, transparent 50%),
-      radial-gradient(ellipse at 20% 100%, rgba(217,119,6,0.06) 0%, transparent 50%);
-    padding: 80px 24px 60px;
+      radial-gradient(ellipse at 50% 15%, rgba(251,191,36,0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 100%, rgba(37,99,235,0.06) 0%, transparent 50%);
+    padding: 24px 24px 60px;
     border-bottom: 1px solid rgba(240,237,228,0.06);
+    position: relative;
+  }
+  .hero-lighthouse {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 520px;
+    margin: 0 auto;
+    padding: 40px 0 20px;
+  }
+  .hero-lighthouse svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .hero-text {
+    padding-bottom: 20px;
   }
   .hero h1 {
     color: #f0ede4;
@@ -51,17 +76,37 @@
   }
   .hero .subtitle {
     font-family: "Avenir Next", -apple-system, sans-serif;
-    font-size: clamp(0.95rem, 1.8vw, 1.15rem);
-    color: rgba(240,237,228,0.5);
+    font-size: clamp(0.85rem, 1.6vw, 1rem);
+    color: rgba(240,237,228,0.4);
     text-transform: uppercase;
-    letter-spacing: 0.15em;
-    margin-bottom: 2em;
+    letter-spacing: 0.2em;
+    margin-bottom: 1.2em;
   }
   .hero nav {
     display: flex;
     gap: 12px;
     flex-wrap: wrap;
     justify-content: center;
+  }
+  .hero-lighthouse .beam-group {
+    transform-origin: 200px 61px;
+    animation: beamSweep 4s ease-in-out infinite alternate;
+  }
+  .hero-lighthouse .pulse-group {
+    transform-origin: 200px 61px;
+    animation: pulseGlow 2s ease-in-out infinite;
+  }
+  @keyframes beamSweep {
+    0%   { transform: rotate(-60deg); }
+    100% { transform: rotate(60deg); }
+  }
+  @keyframes pulseGlow {
+    0%, 100% { transform: scale(0.75); opacity: 0.25; }
+    50%      { transform: scale(1.25); opacity: 0.5; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-lighthouse .beam-group { animation: none; }
+    .hero-lighthouse .pulse-group { animation: none; }
   }
   .hero nav a {
     font-family: "Avenir Next", -apple-system, sans-serif;
@@ -98,7 +143,7 @@
 
   /* ── story text ── */
   .story-body {
-    font-size: clamp(1rem, 1.4vw, 1.12rem);
+    font-size: clamp(1.05rem, 1.4vw, 1.15rem);
     max-width: 700px;
     color: rgba(240,237,228,0.85);
   }
@@ -111,6 +156,95 @@
     color: rgba(251,191,36,0.3);
     letter-spacing: 0.5em;
     margin: 1.5em 0;
+  }
+  .story-figure {
+    margin: 2.5em 0;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid rgba(240,237,228,0.06);
+    cursor: pointer;
+    transition: border-color 0.25s ease, transform 0.25s ease;
+  }
+  .story-figure:hover {
+    border-color: rgba(251,191,36,0.2);
+    transform: translateY(-1px);
+  }
+  .story-figure:focus-visible {
+    outline: 2px solid #fbbf24;
+    outline-offset: 2px;
+  }
+  .story-figure img {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
+  .story-figure figcaption {
+    padding: 8px 16px;
+    font-family: "Avenir Next", -apple-system, sans-serif;
+    font-size: 0.72rem;
+    color: rgba(240,237,228,0.35);
+    text-align: center;
+    background: rgba(255,255,255,0.015);
+    border-top: 1px solid rgba(240,237,228,0.04);
+    letter-spacing: 0.04em;
+  }
+  .story-figure figcaption em {
+    color: rgba(251,191,36,0.5);
+    font-style: normal;
+  }
+
+  /* ── modal error fallback ── */
+  .modal-error {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: none;
+    background: #151d2d;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 24px;
+  }
+  .modal-error.active { display: flex; }
+  .modal-error p {
+    font-family: "Avenir Next", -apple-system, sans-serif;
+    font-size: 0.85rem;
+    color: rgba(240,237,228,0.3);
+    max-width: 280px;
+    line-height: 1.5;
+  }
+  .modal-error p em {
+    color: rgba(251,191,36,0.3);
+    font-style: normal;
+  }
+
+  /* ── utility classes ── */
+  .storyboard-intro {
+    margin-bottom: 28px;
+    color: rgba(240,237,228,0.5);
+    font-size: 0.9rem;
+    font-family: "Avenir Next", -apple-system, sans-serif;
+  }
+  .panel-label {
+    padding: 8px 32px 16px;
+    font-size: 0.8rem;
+    color: rgba(240,237,228,0.4);
+    font-family: "Avenir Next", -apple-system, sans-serif;
+    text-align: center;
+  }
+  .theme-scene-link {
+    color: rgba(251,191,36,0.6);
+    text-decoration: underline;
+    text-decoration-color: rgba(251,191,36,0.15);
+    text-underline-offset: 2px;
+    cursor: pointer;
+    transition: color 0.2s ease, text-decoration-color 0.2s ease;
+  }
+  .theme-scene-link:hover {
+    color: rgba(251,191,36,0.9);
+    text-decoration-color: rgba(251,191,36,0.4);
   }
 
   /* ── scene cards grid ── */
@@ -129,11 +263,6 @@
     display: flex;
     flex-direction: column;
   }
-  .scene-card:hover {
-    border-color: rgba(251,191,36,0.25);
-    background: rgba(255,255,255,0.05);
-    transform: translateY(-2px);
-  }
   .scene-card .card-thumb {
     aspect-ratio: 16 / 9;
     background: #151d2d;
@@ -146,7 +275,17 @@
     transition: transform 0.4s ease;
     opacity: 0.85;
   }
-  .scene-card:hover .card-thumb img { transform: scale(1.05); opacity: 1; }
+  .scene-card:active {
+    transform: translateY(-1px);
+  }
+  @media (hover: hover) {
+    .scene-card:hover {
+      border-color: rgba(251,191,36,0.25);
+      background: rgba(255,255,255,0.05);
+      transform: translateY(-2px);
+    }
+    .scene-card:hover .card-thumb img { transform: scale(1.05); opacity: 1; }
+  }
   .scene-card .card-body { padding: 14px 16px 16px; flex: 1; display: flex; flex-direction: column; }
   .scene-card .card-num {
     font-family: "Avenir Next", -apple-system, sans-serif;
@@ -209,14 +348,32 @@
     position: relative;
     overflow: hidden;
   }
+
+  /* ── loading lighthouse ── */
+  .modal-loading {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: none;
+    background: #0b111e;
+  }
+  .modal-loading.active {
+    display: block;
+  }
+  .modal-loading svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
   .modal-img {
     width: 100%;
     display: block;
     border-bottom: 1px solid rgba(240,237,228,0.06);
-    transition: opacity 0.3s ease;
-  }
-  .modal-img.fade-out {
     opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+  .modal-img.loaded {
+    opacity: 1;
   }
 
   /* ── modal nav buttons ── */
@@ -387,8 +544,44 @@
     color: rgba(240,237,228,0.25);
   }
 
+  /* ── focus ring ── */
+  :focus-visible {
+    outline: 2px solid #fbbf24;
+    outline-offset: 2px;
+  }
+
   /* ── responsive ── */
-  @media (max-width: 600px) {
+
+  /* Touch-friendly targets on touch devices */
+  @media (pointer: coarse) {
+    .hero nav a { padding: 12px 24px; }
+    .modal-nav-btn { width: 48px; height: 48px; }
+    .modal-close { width: 48px; height: 48px; }
+  }
+
+  /* Narrow phones (≤374px) */
+  @media (max-width: 374px) {
+    .hero { min-height: 65vh; padding: 12px 12px 36px; }
+    .hero-lighthouse { max-width: 260px; padding: 16px 0 8px; }
+    .hero nav { gap: 8px; }
+    .hero nav a { font-size: 0.78rem; padding: 10px 16px; }
+    .container { padding: 0 12px; }
+    .section { padding: 32px 0; }
+    .scene-card .card-body { padding: 10px 12px 14px; }
+    .modal-overlay { padding: 8px; }
+    .modal { border-radius: 12px; }
+    .modal-body { padding: 16px; }
+    .modal-nav-btn { width: 32px; height: 32px; font-size: 0.85rem; }
+    .modal-close { top: 6px; right: 8px; width: 32px; height: 32px; font-size: 1rem; }
+    .themes-grid { gap: 12px; }
+    .theme-card { padding: 14px 16px; }
+    .footer { padding: 36px 16px; }
+  }
+
+  /* Ordinary phones (375–599px) */
+  @media (min-width: 375px) and (max-width: 599px) {
+    .hero { min-height: 70vh; padding: 16px 16px 40px; }
+    .hero-lighthouse { max-width: 360px; padding: 24px 0 12px; }
     .container { padding: 0 16px; }
     .section { padding: 40px 0; }
     .scene-grid { grid-template-columns: 1fr; }
@@ -398,19 +591,113 @@
     .modal-nav-btn { width: 36px; height: 36px; font-size: 1rem; }
     .modal-close { top: 8px; right: 12px; width: 36px; height: 36px; font-size: 1.2rem; }
   }
+  /* 375–599px phones also share these */
+  @media (max-width: 599px) {
+    .hero nav { gap: 8px; }
+    .hero nav a { padding: 10px 18px; }
+    .scene-card .card-body { padding: 12px 14px 14px; }
+    .modal .modal-counter { font-size: 0.65rem; padding: 3px 10px; }
+  }
+
+  /* Tablets (600–899px) */
+  @media (min-width: 600px) and (max-width: 899px) {
+    .hero { padding: 32px 24px 48px; }
+    .hero-lighthouse { max-width: 440px; padding: 32px 0 16px; }
+    .scene-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+    .themes-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    .modal-body { padding: 24px 28px; }
+  }
+
+  /* Small laptops (900–1199px) */
+  @media (min-width: 900px) and (max-width: 1199px) {
+    .hero-lighthouse { max-width: 480px; }
+    .scene-grid { gap: 16px; }
+  }
+
+  /* Desktop (1200–1599px) — default styles, wide enough for full layout */
+
+  /* Ultrawide (≥1600px) */
+  @media (min-width: 1600px) {
+    .hero-lighthouse { max-width: 600px; }
+    .scene-grid {
+      grid-template-columns: repeat(3, 1fr);
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .themes-grid { max-width: 1100px; margin: 0 auto; }
+    .story-body { max-width: 760px; margin: 0 auto; }
+  }
+
+  /* Landscape phones */
+  @media (max-height: 480px) and (orientation: landscape) {
+    .hero { min-height: 100vh; padding: 12px 24px 24px; }
+    .hero-lighthouse { max-width: 200px; padding: 8px 0; }
+    .hero nav { gap: 6px; }
+    .hero nav a { padding: 6px 14px; font-size: 0.78rem; }
+    .hero .subtitle { margin-bottom: 0.6em; }
+  }
+
+  /* Safe areas for notched phones */
+  @supports (padding: env(safe-area-inset-top)) {
+    .hero { padding-left: max(24px, env(safe-area-inset-left)); padding-right: max(24px, env(safe-area-inset-right)); }
+    .modal-overlay { padding-left: max(24px, env(safe-area-inset-left)); padding-right: max(24px, env(safe-area-inset-right)); }
+    .modal-close { right: max(24px, env(safe-area-inset-right)); }
+  }
 </style>
 </head>
 <body>
 
 <!-- ═══ HERO ═══ -->
 <header class="hero">
-  <p class="subtitle">A Bedtime Story</p>
-  <h1>The Lantern Keeper</h1>
-  <nav>
-    <a href="#story">The Story</a>
-    <a href="#storyboard">Storyboard</a>
-    <a href="#themes">Visual Themes</a>
-  </nav>
+  <div class="hero-lighthouse">
+    <svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid meet" aria-label="The Lantern Keeper">
+      <rect width="400" height="225" fill="#0b111e"/>
+      <g fill="rgba(240,237,228,0.15)">
+        <circle cx="45" cy="30" r="1"/><circle cx="95" cy="55" r="0.7"/>
+        <circle cx="160" cy="20" r="1.2"/><circle cx="280" cy="35" r="0.8"/>
+        <circle cx="340" cy="18" r="1"/><circle cx="375" cy="50" r="0.6"/>
+      </g>
+      <rect y="176" width="400" height="49" fill="#090f1c"/>
+      <path d="M0 178 Q30 176 60 178 Q90 180 120 178 Q150 176 180 178 Q210 180 240 178 Q270 176 300 178 Q330 180 360 178 Q390 176 400 178" fill="none" stroke="rgba(240,237,228,0.04)" stroke-width="0.8"/>
+      <path d="M168 175 L174 162 L182 166 L192 158 L200 160 L208 156 L218 162 L226 158 L232 165 L236 175" fill="#121a2e"/>
+      <path d="M183 162 L187 68 L213 68 L217 162" fill="#d4d0c6" opacity="0.12"/>
+      <rect x="184" y="92" width="32" height="10" fill="#d4d0c6" opacity="0.06"/>
+      <rect x="184" y="118" width="32" height="10" fill="#d4d0c6" opacity="0.06"/>
+      <rect x="183" y="144" width="34" height="10" fill="#d4d0c6" opacity="0.06"/>
+      <rect x="181" y="65" width="38" height="4" rx="1" fill="#d4d0c6" opacity="0.15"/>
+      <rect x="187" y="54" width="26" height="13" rx="1" fill="#fbbf24" opacity="0.06"/>
+      <rect x="189" y="56" width="10" height="9" rx="1" fill="#fbbf24" opacity="0.1"/>
+      <rect x="201" y="56" width="10" height="9" rx="1" fill="#fbbf24" opacity="0.1"/>
+      <path d="M187 54 Q200 46 213 54" fill="none" stroke="#d4d0c6" opacity="0.15" stroke-width="1.2"/>
+      <g class="pulse-group">
+        <circle cx="200" cy="61" r="4" fill="#fbbf24" opacity="0.35"/>
+      </g>
+      <g class="beam-group" opacity="0.18">
+        <polygon points="200,61 345,5 345,117" fill="url(#heroBeamGrad)"/>
+      </g>
+      <defs>
+        <linearGradient id="heroBeamGrad" x1="0.5" y1="0.5" x2="1" y2="0.5">
+          <stop offset="0%" stop-color="#fbbf24" stop-opacity="0.5"/>
+          <stop offset="100%" stop-color="#fbbf24" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+    </svg>
+  </div>
+  <div class="hero-text">
+    <p class="subtitle">A Bedtime Story</p>
+    <h1>The Lantern Keeper</h1>
+    <nav>
+      <a href="#story">The Story</a>
+      <a href="#storyboard">Storyboard</a>
+      <a href="#themes">Visual Themes</a>
+    </nav>
+  </div>
 </header>
 
 <!-- ═══ STORY ═══ -->
@@ -422,6 +709,11 @@
 
       <p>He asked to help every week. "You're barely tall enough to reach the lamp," the fishermen told him. Gareth himself — a man with hands like old rope, knuckles swollen, movements slow and certain — would just smile, his beard parting around teeth worn smooth, and shake his head. But Finn noticed: Gareth never told him to stop watching. And sometimes, at the base of the tower, Gareth would pause and look back at Finn's window before going inside. As if he could feel the boy's eyes on him. As if he were waiting for Finn to be ready.</p>
 
+      <figure class="story-figure" onclick="openModal(2)" role="button" tabindex="0" aria-label="View Scene 02 in storyboard">
+        <img src="scenes/02_the_storm_gathers.png?nf_resize=fit&w=600" alt="Scene 02 — The Storm Gathers" loading="lazy">
+        <figcaption><em>Scene 02</em> — The Storm Gathers</figcaption>
+      </figure>
+
       <p>The morning of the storm, the gulls gathered on the rooftops in absolute silence. Not calling, not fighting — just sitting, watching the sea. The bell buoy rang faster, more desperate. The old fishermen felt it in their knees, the deep ache that came before a hard blow. By midday, the sky had turned the color of a bruise, purple-black and swollen, clouds moving low and fast like they were running from something. The wind came in hard wet gusts that ripped slates from roofs and sent laundry spiraling into the gray air. Finn's ears popped as he ran to bring in the washing, the sheets snapping like sails. His mother stood in the doorway, her hands raw from scrubbing, the knuckles red and cracked. "Come inside," she said. But her eyes were on the lighthouse — on the dark lantern room — and her jaw was tight. She was looking at it. For the first time she could remember, she was looking at the tower. He turned. Old Man Gareth was on the quay, one hand clutching his chest, his face tilted toward the light that was not there. He went down slowly, like a tree falling, and the healer's boy caught him before he hit the stone. They carried him away on a door. His face was the color of wet ash.</p>
 
       <p>On the <em>Mercy</em>, thirty miles out, a girl named Ellie Thorn held onto the rail and watched the sky turn black. The captain had been at the wheel for fourteen hours, his hands raw, his eyes fixed on the dark horizon. They had lost the topsail — torn off with a sound like a gunshot — and the crew were working the pumps in the hold, where the sea had found a leak. The wind was pushing them toward the rocks. Ellie's father had given her the medicine crates to hold onto, and she held them, her arms wrapped around the wood, her knuckles white. "Watch for the light," the captain had told her. She had been watching for hours. There was no light.</p>
@@ -430,15 +722,30 @@
 
       <p>Finn stood in the corner, pressed against the rough pine wall, his heart hammering in his throat, his wrists, the tips of his fingers. He knew those gears. The wheel needed exactly three rotations — he had counted them, mouthing the numbers in the dark. The chain had to be pulled slow and steady, never jerking, never stopping. The pause before the match — that moment of stillness — that was where Gareth whispered something Finn had never heard. But standing in the inn, his knowledge felt like a story he had told himself. <em>What if the lamp shatters and the ship wrecks and Ellie is out there and the medicine is on that ship and it's my fault?</em> He thought of his father. He thought of his mother's knife stopping. He thought of the sea glass under his bed, green and smooth, given by a girl who had said <em>for luck</em>. He waited for someone else. No one moved. No one spoke. <em>I am just a boy,</em> he thought. <em>So was Gareth, once.</em></p>
 
+      <figure class="story-figure" onclick="openModal(5)" role="button" tabindex="0" aria-label="View Scene 05 in storyboard">
+        <img src="scenes/05_the_choice.png?nf_resize=fit&w=600" alt="Scene 05 — The Choice" loading="lazy">
+        <figcaption><em>Scene 05</em> — The Choice</figcaption>
+      </figure>
+
       <p>He slipped out while the argument crested, the oak door groaning shut behind him, cutting off warmth and noise like a blade. The rain hit him like a wall — cold, violent, horizontal, tasting of salt and iron. He ran with his head down, his bare feet slipping on the wet cobbles, the sharp edges biting into his soles. At the base of the lighthouse, he stopped. The tower loomed above him, black against a blacker sky, the stars drowned, the sea a chaos of foam and crashing. The bell buoy was ringing frantically, desperate. He looked up at the dark lantern room. The light that hadn't been there for his father. His mother's knife stopping mid-stroke. Ellie on the <em>Mercy</em>, watching a shore she couldn't see. He put his hand on the cold wet stone of the first step. Then he stopped. His foot came back down. He turned. The Fox & Gull glowed yellow through the rain. Shapes moved behind the windows. He could go back. He could be a boy. <em>But the light won't light itself.</em> His father's voice, clear and close, as if he were standing in the rain beside him. He turned back to the stairs.</p>
 
       <p>The first step was the hardest thing he had ever done. The stairs wound upward in tight spirals, each step worn smooth and slightly concave by decades of feet. The first landing had a small window — the village below, yellow squares of light, the dark shape of the inn like a ship on a dark sea. The second landing showed the ocean, white-capped and heaving, the bell buoy being tossed like a toy. Halfway up, the smell changed — salt and stone gave way to oil and brass and old dust, the smell of a room that has kept its secrets. The wind screamed through hairline cracks in the mortar, a thin high whistle that seemed to come from everywhere at once. The stone vibrated under his hand, the whole tower swaying with each gust. His wet clothes clung to him, heavy and cold as a burial shroud, and his teeth were chattering so hard he bit his tongue — copper and salt, sharp and bright. He wanted to stop. He wanted to sit down on the cold stone and wait. But the light would not light itself. So he kept climbing.</p>
 
       <p>The door at the top was heavy oak, worn smooth around the iron handle by a hundred years of hands. When he pushed it open, the silence inside was so deep it pressed against his eardrums, swallowing the sound of the storm. The mechanism waited — cold brass valves green with patina, dark glass prisms that caught no light, the great lamp dead and cold. The room smelled of kerosene and old smoke and the particular stillness of high places, a stillness that felt older than he was. His fingers found the familiar grooves on the wheel — the spot where the brass was worn thinner, the slight wobble in the handle that Gareth's hands had made over forty years. He closed his eyes and saw Gareth's hands, saw them turning. <em>One.</em> The wheel resisted, old grease stiff in the joints — he put his whole weight into it, felt it in his shoulders. <em>Two.</em> It gave with a groan, a grinding sound deep in the wall, metal waking after a long sleep. <em>Three.</em> It turned freely, gears engaging with a sound like a key turning in a great lock. He pulled the chain slow and steady — never jerking, never stopping — and felt the shutters click open above him, heard the hiss of gas beginning to flow, a sound like a snake waking in the dark. He took the match from the tin box. His fingers were numb and clumsy. He held it, not yet striking. The pause. This was where Gareth would whisper something. Finn did not know the words, so he said his own. <em>For the ships. For the children. For my father.</em> He struck the match against the stone sill. The flame flared blue, the sharp chemical scent filling his nose, then steadied into gold. He opened the valve. The mantles caught — first a dim orange glow like a dying ember, then a blazing white heat that bloomed, filling the room with sudden brightness. The prisms caught the light — the way light catches in cut crystal — and threw it outward, a long blade of gold cutting across the storm. <em>Tick.</em> The mechanism engaged, the sound of a clock striking the hour. <em>Tick.</em> The lamp rotated. <em>Tick.</em> The beam swept across the water and found the horizon. Finn put his hands on the warm brass and felt it humming — the heartbeat of the lighthouse, alive again. The warmth spread up his arms, into his chest. He was shivering, but the shivering was slowing. The light caught the dust in the air, filled the room with tiny stars. It gleamed on the green patina, turning it to gold. Finn stood in the middle of it and for the first time since his father died, he was not cold.</p>
 
+      <figure class="story-figure" onclick="openModal(8)" role="button" tabindex="0" aria-label="View Scene 08 in storyboard">
+        <img src="scenes/08_the_light.png?nf_resize=fit&w=600" alt="Scene 08 — The Light" loading="lazy">
+        <figcaption><em>Scene 08</em> — The Light</figcaption>
+      </figure>
+
       <p>On the <em>Mercy</em>, Ellie saw it first — a point of gold on the horizon, small and steady. She thought she was imagining it. But it grew, the beam sweeping toward them, cutting a path through the rain and spray. "Light!" she screamed. "Light! I see it!" The captain turned the wheel. The crew pulled on the lines. The <em>Mercy</em> followed the golden path through the dark. Ellie watched the tower emerge from the storm, the light growing larger, and she thought of the boy with the quiet eyes who had put a piece of sea glass in his pocket and said thank you like he really meant it.</p>
 
       <p>Finn stayed in the lantern room until he heard footsteps on the stairs. The blacksmith came first, his face pale in the lamplight. Then the healer, still in his apron. Then Finn's mother. She stood in the doorway, not entering at first, just looking at him — a small boy in the middle of all that light. Then she crossed the room and knelt beside him and put her arms around him. Her body was shaking. She pressed her face into his wet hair and held him. Outside the storm was still raging. Inside, the lamp was turning, ticking, filling the room with gold. "Your father would be proud," she whispered. "He would be so proud." Finn did not say anything. He just leaned into her and felt the warmth of the lamp on both of them.</p>
+
+      <figure class="story-figure" onclick="openModal(11)" role="button" tabindex="0" aria-label="View Scene 11 in storyboard">
+        <img src="scenes/11_the_dawn.png?nf_resize=fit&w=600" alt="Scene 11 — The Dawn" loading="lazy">
+        <figcaption><em>Scene 11</em> — The Dawn</figcaption>
+      </figure>
 
       <p>In the morning, the <em>Mercy</em> rounded the point, her sails in rags, her hull scarred, but alive. Finn watched from the lantern room as she dropped anchor. He watched a small figure with red hair run down the gangplank and crash into her father's arms. He watched the healer close his eyes and hold his daughter. He watched his mother on the quay below, looking up at the tower. She raised her hand — not a wave, just a sign that she saw him. He pressed his palm flat against the cool glass. He was inside the light now.</p>
 
@@ -446,9 +753,19 @@
 
       <p>And Finn did. That first night alone, standing in the dark with the match in his hand, the pause felt infinite. He felt Gareth watching from the village. He felt his mother watching from the window. He felt his father somewhere out beyond the light. He struck the match. The flame caught. The light bloomed. He put his hands on the warm brass, and he was not afraid.</p>
 
+      <figure class="story-figure" onclick="openModal(12)" role="button" tabindex="0" aria-label="View Scene 12 in storyboard">
+        <img src="scenes/12_the_inheritance.png?nf_resize=fit&w=600" alt="Scene 12 — The Inheritance" loading="lazy">
+        <figcaption><em>Scene 12</em> — The Inheritance</figcaption>
+      </figure>
+
       <p>The years passed. The sea changed with the seasons — flat and blue in summer, gray and restless in autumn, black and furious in winter, when the cold seeped through the stone and the lamp's warmth was the only comfort in the dark. Finn learned the lighthouse the way you learn a living thing: by listening. The groan of damp gears told him when to oil them. The way the glass hummed in a south wind told him a storm was coming before the horizon showed a sign. He fixed the crack in the mortar that had let the wind whistle through on winter nights. He replaced the mantles every month, their delicate mesh crumbling like old lace between his fingers. He learned the constellations well enough to name them in his sleep — Orion chasing the Bull, the Swan flying south, the North Star fixed and unblinking above them all. On clear nights he would say their names aloud in the dark, just to hear a voice. His mother started looking at the lighthouse. First quick glances, then longer looks, then one evening he looked down from the lantern room and saw her standing at the bedroom window, watching him. She did not press her palms to the glass the way he used to. She just stood there, her hand resting on the sill, and watched the light. Gareth came by once a month, climbing slower each time. "There are ships saved and ships lost," he told Finn one evening. "You carry them both. That's the weight of the light." Finn came to understand what he meant.</p>
 
       <p>Four winters after the storm, a boy appeared at the base of the tower. He was small — maybe eight years old — with dark hair plastered to his forehead by the rain and the same hungry look in his eyes that Finn remembered having. He stood at the bottom of the stairs, looking up at the dark lantern room, and he did not move. Finn watched him from the top for a long time. Then he walked down. "What's your name?" "Tom. Tom Sparrow." The boy's voice was small but steady. "I want to learn the light." Finn looked at him. The boy did not look away. And Finn smiled — the same smile Gareth had given him, years ago, the smile that meant <em>I see you. I was you. Wait.</em> "You've been watching," Finn said. Tom nodded, his eyes never leaving the tower. "Yes, sir. Every night." Finn put his hand on the boy's shoulder — the same spot where Gareth's hand had been, where his mother's hand had been, an unbroken chain of hands passing the light from one keeper to the next. "Come on, then," he said. "The first lesson is watching."</p>
+
+      <figure class="story-figure" onclick="openModal(15)" role="button" tabindex="0" aria-label="View Scene 15 in storyboard">
+        <img src="scenes/15a_the_cycle_echo.png?nf_resize=fit&w=600" alt="Scene 15 — The Cycle" loading="lazy">
+        <figcaption><em>Scene 15</em> — The Cycle</figcaption>
+      </figure>
 
       <p>That evening, Finn stood at the top of the stairs and watched Tom press his small hands flat against the cold glass of the lantern room, just as Finn himself had pressed his hands against his bedroom window a thousand nights ago. The boy's breath fogged the glass. His eyes were wide. "Does it ever go out?" Tom asked. "Not if I can help it," Finn said. He put his hand on the wheel. The brass was warm from the day's sun. Outside, the sky was fading, the bell buoy ringing somewhere in the dusk. The sea was calm, breathing in and out against the cliffs the same way it had breathed for a thousand years before them. "Watch now," Finn said. And he began to turn the wheel.</p>
 
@@ -463,7 +780,7 @@
 <section id="storyboard" class="section" style="background: rgba(255,255,255,0.01);">
   <div class="container">
     <div class="section-title"><h2>Storyboard</h2></div>
-    <p style="margin-bottom:28px;color:rgba(240,237,228,0.5);font-size:0.9rem;font-family:'Avenir Next',-apple-system,sans-serif">15 scenes · Click any card to view the full storyboard details</p>
+    <p class="storyboard-intro">15 scenes · Click any card to view the full storyboard details</p>
     <div class="scene-grid" id="sceneGrid"></div>
   </div>
 </section>
@@ -475,11 +792,11 @@
     <div class="themes-grid">
       <div class="theme-card">
         <h3>Hands on Glass</h3>
-        <p>The dominant visual metaphor. Scene 1: Finn presses his palms to the bedroom window, watching from outside. Scene 11: Finn presses his palm to the lantern room glass — now inside the light. Scene 15: Tom mirrors Finn's gesture, the cycle renewed. Longing → belonging.</p>
+        <p>The dominant visual metaphor. <span class="theme-scene-link" onclick="openModal(1)">Scene 1</span>: Finn presses his palms to the bedroom window, watching from outside. <span class="theme-scene-link" onclick="openModal(11)">Scene 11</span>: Finn presses his palm to the lantern room glass — now inside the light. <span class="theme-scene-link" onclick="openModal(15)">Scene 15</span>: Tom mirrors Finn's gesture, the cycle renewed. Longing → belonging.</p>
       </div>
       <div class="theme-card">
         <h3>Hands on the Brass Wheel</h3>
-        <p>Knowledge → Mastery → Legacy. Scene 7: Finn's child hands trace the worn grooves. Scene 8: His hands on warm brass, the lamp alive. Scene 12: Gareth's fingers trace a farewell. Scene 15: Finn's hand on the wheel, teaching the next.</p>
+        <p>Knowledge → Mastery → Legacy. <span class="theme-scene-link" onclick="openModal(7)">Scene 7</span>: Finn's child hands trace the worn grooves. <span class="theme-scene-link" onclick="openModal(8)">Scene 8</span>: His hands on warm brass, the lamp alive. <span class="theme-scene-link" onclick="openModal(12)">Scene 12</span>: Gareth's fingers trace a farewell. <span class="theme-scene-link" onclick="openModal(15)">Scene 15</span>: Finn's hand on the wheel, teaching the next.</p>
       </div>
       <div class="theme-card">
         <h3>Hand on Shoulder</h3>
@@ -487,7 +804,7 @@
       </div>
       <div class="theme-card">
         <h3>The Bell Buoy</h3>
-        <p>The anchoring sound — calm at the start, frantic in crisis, peaceful at the end. Present in scenes 1, 2, 5, 6, 9, 13, 15. Its character tracks the emotional arc of the story.</p>
+        <p>The anchoring sound — calm at the start, frantic in crisis, peaceful at the end. Present in scenes <span class="theme-scene-link" onclick="openModal(1)">1</span>, <span class="theme-scene-link" onclick="openModal(2)">2</span>, <span class="theme-scene-link" onclick="openModal(5)">5</span>, <span class="theme-scene-link" onclick="openModal(6)">6</span>, <span class="theme-scene-link" onclick="openModal(9)">9</span>, <span class="theme-scene-link" onclick="openModal(13)">13</span>, <span class="theme-scene-link" onclick="openModal(15)">15</span>. Its character tracks the emotional arc of the story.</p>
       </div>
       <div class="theme-card">
         <h3>Gold vs. Cold</h3>
@@ -495,7 +812,7 @@
       </div>
       <div class="theme-card">
         <h3>The Beam of Light</h3>
-        <p>The central image. Finn watches it from outside (Scene 1). Creates it with his own hands (Scene 8). A ship follows it home (Scene 9). His mother watches it, healed (Scene 13). It sweeps out again, endless (Scene 15).</p>
+        <p>The central image. Finn watches it from outside (<span class="theme-scene-link" onclick="openModal(1)">Scene 1</span>). Creates it with his own hands (<span class="theme-scene-link" onclick="openModal(8)">Scene 8</span>). A ship follows it home (<span class="theme-scene-link" onclick="openModal(9)">Scene 9</span>). His mother watches it, healed (<span class="theme-scene-link" onclick="openModal(13)">Scene 13</span>). It sweeps out again, endless (<span class="theme-scene-link" onclick="openModal(15)">Scene 15</span>).</p>
       </div>
     </div>
   </div>
@@ -506,6 +823,44 @@
   <button class="modal-close" id="modalClose" aria-label="Close">&times;</button>
   <div class="modal" id="modalContent">
     <div class="modal-image-area" id="modalImageArea">
+      <div class="modal-error" id="modalError">
+        <p>The scene image could not be loaded.<br><em>Try again or browse the storyboard below.</em></p>
+      </div>
+      <div class="modal-loading" id="modalLoading">
+        <svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid meet" aria-label="Loading scene">
+          <rect width="400" height="225" fill="#0b111e"/>
+          <g fill="rgba(240,237,228,0.2)">
+            <circle cx="45" cy="30" r="1"/><circle cx="95" cy="55" r="0.7"/>
+            <circle cx="160" cy="20" r="1.2"/><circle cx="280" cy="35" r="0.8"/>
+            <circle cx="340" cy="18" r="1"/><circle cx="375" cy="50" r="0.6"/>
+          </g>
+          <rect y="176" width="400" height="49" fill="#090f1c"/>
+          <path d="M0 178 Q30 176 60 178 Q90 180 120 178 Q150 176 180 178 Q210 180 240 178 Q270 176 300 178 Q330 180 360 178 Q390 176 400 178" fill="none" stroke="rgba(240,237,228,0.03)" stroke-width="0.8"/>
+          <path d="M168 175 L174 162 L182 166 L192 158 L200 160 L208 156 L218 162 L226 158 L232 165 L236 175" fill="#121a2e"/>
+          <path d="M183 162 L187 68 L213 68 L217 162" fill="#d4d0c6" opacity="0.08"/>
+          <rect x="184" y="92" width="32" height="10" fill="#d4d0c6" opacity="0.04"/>
+          <rect x="184" y="118" width="32" height="10" fill="#d4d0c6" opacity="0.04"/>
+          <rect x="183" y="144" width="34" height="10" fill="#d4d0c6" opacity="0.04"/>
+          <rect x="181" y="65" width="38" height="4" rx="1" fill="#d4d0c6" opacity="0.1"/>
+          <rect x="187" y="54" width="26" height="13" rx="1" fill="#fbbf24" opacity="0.04"/>
+          <rect x="189" y="56" width="10" height="9" rx="1" fill="#fbbf24" opacity="0.08"/>
+          <rect x="201" y="56" width="10" height="9" rx="1" fill="#fbbf24" opacity="0.08"/>
+          <path d="M187 54 Q200 46 213 54" fill="none" stroke="#d4d0c6" opacity="0.1" stroke-width="1.2"/>
+          <circle cx="200" cy="61" r="4" fill="#fbbf24" opacity="0.3">
+            <animate attributeName="r" values="3;5;3" dur="2s" repeatCount="indefinite"/>
+          </circle>
+          <g opacity="0.15">
+            <animateTransform attributeName="transform" type="rotate" values="-60 200 61;60 200 61" dur="3.5s" repeatCount="indefinite"/>
+            <polygon points="200,61 345,5 345,117" fill="url(#beamGrad)"/>
+          </g>
+          <defs>
+            <linearGradient id="beamGrad" x1="0.5" y1="0.5" x2="1" y2="0.5">
+              <stop offset="0%" stop-color="#fbbf24" stop-opacity="0.4"/>
+              <stop offset="100%" stop-color="#fbbf24" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
       <img class="modal-img" id="modalImage" src="" alt="">
       <div class="modal-nav">
         <button class="modal-nav-btn" id="modalPrev" aria-label="Previous scene">&#8592;</button>
@@ -701,34 +1056,36 @@ const totalScenes = scenes.length;
 const overlay = document.getElementById("modalOverlay");
 const closeBtn = document.getElementById("modalClose");
 const modalImage = document.getElementById("modalImage");
+const modalLoading = document.getElementById("modalLoading");
+const modalImageArea = document.getElementById("modalImageArea");
 const modalCounter = document.getElementById("modalCounter");
 const modalBody = document.getElementById("modalBody");
 const prevBtn = document.getElementById("modalPrev");
 const nextBtn = document.getElementById("modalNext");
 
-function renderScene(id, direction) {
+function renderScene(id) {
   const s = scenes.find(x => x.id === id);
   if (!s) return;
-
-  const index = scenes.indexOf(s);
 
   // counter
   modalCounter.textContent = `${s.num} of ${String(totalScenes).padStart(2, "0")}`;
 
-  // image — crossfade on nav, instant on open
+  // image — show skeleton + clear stale image immediately, fade in on load
   const newSrc = s.panels ? s.panels[0] : s.image;
-  if (direction) {
-    modalImage.classList.add("fade-out");
-    setTimeout(() => {
-      modalImage.src = imgUrl(newSrc, 1200);
-      modalImage.alt = s.title;
-      modalImage.classList.remove("fade-out");
-    }, 150);
-  } else {
-    modalImage.classList.remove("fade-out");
-    modalImage.src = imgUrl(newSrc, 1200);
-    modalImage.alt = s.title;
-  }
+  modalImage.classList.remove("loaded");
+  modalImage.src = "";
+  modalLoading.classList.add("active");
+  modalImage.onload = () => {
+    modalImage.classList.add("loaded");
+    modalLoading.classList.remove("active");
+    document.getElementById("modalError").classList.remove("active");
+  };
+  modalImage.onerror = () => {
+    modalLoading.classList.remove("active");
+    document.getElementById("modalError").classList.add("active");
+  };
+  modalImage.src = imgUrl(newSrc, 1200);
+  modalImage.alt = s.title;
 
   // body
   modalBody.innerHTML = `
@@ -760,26 +1117,43 @@ function renderScene(id, direction) {
       insert.className = "modal-panel-insert";
       insert.style.cssText = "border-top:1px solid rgba(240,237,228,0.06)";
       insert.innerHTML = `
-        <img class="modal-img" src="${imgUrl(src, 1200)}" alt="${s.title} panel ${i+1}" loading="lazy">
-        <div style="padding:8px 32px 16px;font-size:0.8rem;color:rgba(240,237,228,0.4);font-family:'Avenir Next',-apple-system,sans-serif;text-align:center">${s.panelLabels[i]}</div>
+        <img class="modal-img" src="${imgUrl(src, 1200)}" alt="${s.title} panel ${i+1}" loading="lazy" onload="this.classList.add('loaded')">
+        <div class="panel-label">${s.panelLabels[i]}</div>
       `;
       modalBody.parentNode.appendChild(insert);
     });
   }
 }
 
+// ── debounced navigation ──
+let navTimer = null;
 function navigateScene(delta) {
+  if (navTimer) clearTimeout(navTimer);
   const current = scenes.findIndex(s => s.id === currentSceneId);
   if (current === -1) return;
-  // wrap around
   const next = ((current + delta) % totalScenes + totalScenes) % totalScenes;
-  currentSceneId = scenes[next].id;
-  renderScene(currentSceneId, delta);
+  navTimer = setTimeout(() => {
+    currentSceneId = scenes[next].id;
+    renderScene(currentSceneId);
+    navTimer = null;
+  }, 180);
 }
+
+// ── touch swipe for modal ──
+let touchStartX = 0;
+modalImageArea.addEventListener("touchstart", (e) => {
+  touchStartX = e.changedTouches[0].screenX;
+}, { passive: true });
+modalImageArea.addEventListener("touchend", (e) => {
+  const deltaX = e.changedTouches[0].screenX - touchStartX;
+  if (Math.abs(deltaX) > 50) {
+    navigateScene(deltaX > 0 ? -1 : 1);
+  }
+}, { passive: true });
 
 function openModal(id) {
   currentSceneId = id;
-  renderScene(id, 0);
+  renderScene(id);
   overlay.classList.add("active");
   document.body.style.overflow = "hidden";
 }

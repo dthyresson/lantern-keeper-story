@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Review Report — The Lantern Keeper</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    background: #0b111e;
+    color: #f0ede4;
+    line-height: 1.6;
+    padding: 48px 24px;
+  }
+  .container { max-width: 720px; margin: 0 auto; }
+  h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.25em;
+    color: #fbbf24;
+  }
+  .meta {
+    font-size: 0.85rem;
+    color: rgba(240,237,228,0.4);
+    margin-bottom: 2em;
+    padding-bottom: 1.5em;
+    border-bottom: 1px solid rgba(240,237,228,0.08);
+  }
+  .score {
+    display: inline-block;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #fbbf24;
+    margin-bottom: 0.5em;
+  }
+  .score-label { font-size: 0.85rem; color: rgba(240,237,228,0.4); }
+  h2 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-top: 2em;
+    margin-bottom: 0.75em;
+    color: #f0ede4;
+  }
+  h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+    color: #fbbf24;
+  }
+  p { margin-bottom: 1em; color: rgba(240,237,228,0.8); }
+  ul { margin-bottom: 1em; padding-left: 1.25em; }
+  li { margin-bottom: 0.4em; color: rgba(240,237,228,0.75); }
+  li strong { color: #f0ede4; }
+  .tag {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 2px 10px;
+    border-radius: 100px;
+    background: rgba(251,191,36,0.1);
+    color: #fbbf24;
+    margin-right: 4px;
+  }
+  .tag-impact-high { background: rgba(239,68,68,0.12); color: #ef4444; }
+  .tag-impact-medium { background: rgba(251,191,36,0.1); color: #fbbf24; }
+  .tag-impact-low { background: rgba(240,237,228,0.06); color: rgba(240,237,228,0.5); }
+  hr { border: none; border-top: 1px solid rgba(240,237,228,0.06); margin: 2em 0; }
+  .lens-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 24px; margin-bottom: 1.5em; }
+  .lens-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid rgba(240,237,228,0.04); }
+  .lens-name { font-size: 0.9rem; color: rgba(240,237,228,0.7); }
+  .lens-score { font-size: 1.1rem; font-weight: 600; color: #fbbf24; }
+  .total-row { grid-column: 1 / -1; display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-top: 2px solid rgba(251,191,36,0.2); margin-top: 4px; }
+  .total-row .lens-name { font-weight: 600; color: #f0ede4; }
+  .total-row .lens-score { font-size: 1.4rem; }
+  @media (max-width: 500px) { body { padding: 24px 16px; } .lens-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>Review Report</h1>
+<p class="meta">
+  <strong>The Lantern Keeper</strong> &middot; Single-page story site &middot; Brand register &middot; Learn pattern
+</p>
+
+<div class="score">35<span class="score-label">/50</span></div>
+<div class="lens-grid">
+  <div class="lens-item"><span class="lens-name">First impression</span><span class="lens-score">7/10</span></div>
+  <div class="lens-item"><span class="lens-name">Hierarchy</span><span class="lens-score">7/10</span></div>
+  <div class="lens-item"><span class="lens-name">Color voice</span><span class="lens-score">8/10</span></div>
+  <div class="lens-item"><span class="lens-name">Type voice</span><span class="lens-score">7/10</span></div>
+  <div class="lens-item"><span class="lens-name">Interaction feel</span><span class="lens-score">6/10</span></div>
+  <div class="total-row"><span class="lens-name">Total</span><span class="lens-score">35/50</span></div>
+</div>
+
+<hr>
+
+<h2>First impression — 7/10</h2>
+<p>The animated lighthouse SVG in the hero is the strongest element. It immediately establishes place, mood, and category — the sweeping beam tells you this is a story about light and the sea before you read a word. The dark navy and gold palette reinforces that without needing to explain.</p>
+<p>The title "The Lantern Keeper" paired with "A Bedtime Story" signals genre and scale. The nav pills are clean but neutral — they don't carry any of the story's voice.</p>
+<p><strong>What holds this back:</strong> The hero's gravitational center is the lighthouse, but at first glance the lighthouse and the title compete for attention. The eye needs a moment to decide where to land.</p>
+
+<h2>Hierarchy — 7/10</h2>
+<p>The section order (hero → story → storyboard → themes → footer) is the right narrative arc for a learn-surface: hook, context, evidence, understanding.</p>
+<p>The story now has scene breaks (six <code>* * *</code> separators) which create breathing room, but each act is still 3–6 paragraphs long. Readers on small screens face an uninterrupted scroll that could benefit from inline imagery or pull-quote rhythm.</p>
+<p>The storyboard grid works well — cards are scannable with clear hierarchy. The modal surfaces the right detail hierarchy: image first (proof), then setting, description, beat, camera direction.</p>
+<p><strong>What holds this back:</strong> The themes section sits at the end as an appendix. The themes are woven throughout the story itself but the page doesn't help the reader connect those dots while reading.</p>
+
+<h2>Color voice — 8/10</h2>
+<p><code>#0b111e</code> deep navy and <code>#fbbf24</code> gold is a confident pairing. Gold is used with restraint — section titles, hover borders, scene numbers, emphasis text — which keeps it meaningful. The contrast between cold navy (the sea, the night) and warm gold (the lamp, safety) directly serves the story's central tension.</p>
+<p>The cream text <code>#f0ede4</code> on dark navy avoids the washed-out look common on dark-mode reading surfaces.</p>
+<p><strong>What holds this back:</strong> The themes section uses the same background as the story section — there's no visual shift to signal "now we're analyzing, not reading."</p>
+
+<h2>Type voice — 7/10</h2>
+<p>Avenir Next for headings and Georgia for body copy is a defendable pairing. The sans-serif/serif split correctly maps to "navigate here" / "read here." The fluid scale works across viewports.</p>
+<p>Story body at <code>clamp(1rem, 1.4vw, 1.12rem)</code> with <code>max-width: 700px</code> — roughly 65–70 characters, within the 60–76ch band for comfortable reading.</p>
+<p><strong>What holds this back:</strong> At smaller viewport sizes the 1rem (16px) body feels tight for extended reading. A <code>clamp(1.05rem, —, 1.12rem)</code> would give phones a half-step more. Scene card meta text at 0.75rem is small.</p>
+
+<h2>Interaction feel — 6/10</h2>
+<p>The modal experience is the main interaction surface. The entrance animation feels natural. The lighthouse loading skeleton during image transitions is thematic. Keyboard navigation (arrow keys, ESC) is wired up. Focus rings are present.</p>
+<p><strong>What holds this back:</strong> The modal image transition flashes when navigating quickly between scenes. No touch swipe gesture support. Scene cards lack active/pressed state on touch. Nav pills at 10px 18px on phones are tight at the 44px minimum hit area.</p>
+
+<hr>
+
+<h2>Smell check</h2>
+<p><strong>No significant AI tells detected.</strong> The layout avoids generic SaaS patterns. The lighthouse SVG animation is the strongest anti-smell — it's specific to this story and couldn't be reused on another project without modification.</p>
+<p>The pill navigation buttons and card grid are conventional choices, but they're serving the right purpose, not filling space.</p>
+
+<hr>
+
+<h2>Top recommendations (by impact)</h2>
+
+<h3><span class="tag tag-impact-high">High</span> Add inline scene imagery to the story section</h3>
+<p><strong>Mode: relayout</strong> — The story is 3,200 words with only text and scene breaks. Dropping a small inline image or thematic icon at each scene break (the bell buoy, a handprint on glass, the brass wheel) would give the eye a rest point and reinforce the visual themes while reading. The images exist in the storyboard.</p>
+
+<h3><span class="tag tag-impact-medium">Medium</span> Improve modal image transition feedback</h3>
+<p><strong>Mode: interaction</strong> — When navigating quickly (rapid arrow key presses), the stacking skeleton transitions create a flash. Debounce rapid navigation so the skeleton stays visible until the final scene's image loads.</p>
+
+<h3><span class="tag tag-impact-medium">Medium</span> Add touch swipe to modal</h3>
+<p><strong>Mode: interaction</strong> — Arrow keys work on desktop. Buttons work everywhere. Swipe gestures (touchstart/touchend for horizontal delta) would make the modal feel native on phones and tablets.</p>
+
+<h3><span class="tag tag-impact-low">Low</span> Increase story body font at small viewports</h3>
+<p><strong>Mode: typeset</strong> — Change <code>clamp(1rem, 1.4vw, 1.12rem)</code> to <code>clamp(1.05rem, 1.4vw, 1.15rem)</code> for better readability on narrow phones without breaking layout.</p>
+
+<h3><span class="tag tag-impact-medium">Medium</span> Connect themes to scenes</h3>
+<p><strong>Mode: relayout/voice</strong> — Each theme card names scenes (e.g., "Scene 1: Finn presses his palms to the bedroom window"). Make those scene numbers clickable links that open the modal at that scene, turning the themes section from a reference appendix into an interactive index.</p>
+
+</div>
+</body>
+</html>
