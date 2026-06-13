@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Lantern Keeper — Story & Storyboard</title>
+<style>
+  /* ── reset ── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: Georgia, "Times New Roman", Times, serif;
+    background: #0b111e;
+    color: #f0ede4;
+    line-height: 1.7;
+  }
+
+  /* ── typography ── */
+  h1, h2, h3, h4 {
+    font-family: "Avenir Next", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+  }
+  h1 { font-size: clamp(2.2rem, 6vw, 3.6rem); }
+  h2 { font-size: clamp(1.4rem, 3vw, 2rem); }
+  h3 { font-size: clamp(1.1rem, 2vw, 1.4rem); }
+  p  { margin-bottom: 1.2em; }
+
+  /* ── layout ── */
+  .container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+
+  /* ── hero ── */
+  .hero {
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(217,119,6,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 100%, rgba(37,99,235,0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 20% 100%, rgba(217,119,6,0.06) 0%, transparent 50%);
+    padding: 80px 24px 60px;
+    border-bottom: 1px solid rgba(240,237,228,0.06);
+  }
+  .hero h1 {
+    color: #f0ede4;
+    margin-bottom: 0.2em;
+  }
+  .hero .subtitle {
+    font-family: "Avenir Next", -apple-system, sans-serif;
+    font-size: clamp(0.95rem, 1.8vw, 1.15rem);
+    color: rgba(240,237,228,0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 2em;
+  }
+  .hero nav {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .hero nav a {
+    font-family: "Avenir Next", -apple-system, sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: rgba(240,237,228,0.7);
+    text-decoration: none;
+    padding: 8px 20px;
+    border: 1px solid rgba(240,237,228,0.12);
+    border-radius: 100px;
+    transition: all 0.25s ease;
+  }
+  .hero nav a:hover {
+    color: #fbbf24;
+    border-color: rgba(251,191,36,0.3);
+    background: rgba(251,191,36,0.06);
+  }
+
+  /* ── sections ── */
+  .section { padding: 64px 0; }
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .section-title h2 { color: #fbbf24; }
+  .section-title::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, rgba(251,191,36,0.25), transparent);
+  }
+
+  /* ── story text ── */
+  .story-body {
+    font-size: clamp(1rem, 1.4vw, 1.12rem);
+    max-width: 700px;
+    color: rgba(240,237,228,0.85);
+  }
+  .story-body p { text-indent: 1.5em; }
+  .story-body p:first-of-type { text-indent: 0; }
+  .story-body em { color: #fbbf24; font-style: normal; }
+  .story-body .scene-break {
+    text-align: center;
+    font-size: 1.5rem;
+    color: rgba(251,191,36,0.3);
+    letter-spacing: 0.5em;
+    margin: 1.5em 0;
+  }
+
+  /* ── scene cards grid ── */
+  .scene-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+  }
+  .scene-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(240,237,228,0.08);
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+  }
+  .scene-card:hover {
+    border-color: rgba(251,191,36,0.25);
+    background: rgba(255,255,255,0.05);
+    transform: translateY(-2px);
+  }
+  .scene-card .card-thumb {
+    aspect-ratio: 16 / 9;
+    background: #151d2d;
+    overflow: hidden;
+  }
+  .scene-card .card-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+    opacity: 0.85;
+  }
+  .scene-card:hover .card-thumb img { transform: scale(1.05); opacity: 1; }
+  .scene-card .card-body { padding: 14px 16px 16px; flex: 1; display: flex; flex-direction: column; }
+  .scene-card .card-num {
+    font-family: "Avenir Next", -apple-system, sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: rgba(251,191,36,0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 2px;
+  }
+  .scene-card h3 {
+    font-size: 1rem;
+    color: #f0ede4;
+    margin-bottom: 4px;
+  }
+  .scene-card .card-meta {
+    font-family: "Avenir Next", -apple-system, sans-serif;
+    font-size: 0.75rem;
+    color: rgba(240,237,228,0.4);
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: auto;
+    padding-top: 8px;
+  }
+  .scene-card .card-meta span {
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: rgba(255,255,255,0.04);
+  }
+
+  /* ── modal ── */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba(6,10,20,0.92);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    padding: 24px;
+    overflow-y: auto;
+  }
+  .modal-overlay.active { display: flex; align-items: flex-start; justify-content: center; }
+  .modal {
+    max-width: 860px;
+    width: 100%;
+    margin: 40px auto;
+    background: #111827;
+    border: 1px solid rgba(240,237,228,0.1);
+    border-radius: 16px;
+    overflow: hidden;
+    animation: modalIn 0.35s ease-out;
+  }
+  @keyframes modalIn {
+    from { opacity: 0; transform: translateY(20px) scale(0.97); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  .modal-image-area {
+    position: relative;
+    overflow: hidden;
+  }
+  .modal-img {
+    width: 100%;
+    display: block;
+    border-bottom: 1px solid rgba(240,237,228,0.06);
+    transition: opacity 0.3s ease;
+  }
+  .modal-img.fade-out {
+    opacity: 0;
+  }
+
+  /* ── modal nav buttons ── */
+  .modal-nav {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    pointer-events: none;
+    padding: 0 8px;
+  }
+  .modal-nav-btn {
+    pointer-events: auto;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid rgba(240,237,228,0.12);
+    background: rgba(6,10,20,0.6);
+    color: rgba(240,237,228,0.5);
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s ease;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  .modal-nav-btn:hover {
+    color: #fbbf24;
+    border-color: rgba(251,191,36,0.35);
+    background: rgba(6,10,20,0.8);
+  }
+  .modal-nav-btn:active {
+    transform: scale(0.92);
+  }
+
+  /* ── modal scene counter ── */
+  .modal-counter {
+    position: absolute;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: "Avenir Next", -apple-system, sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: rgba(240,237,228,0.4);
+    background: rgba(6,10,20,0.5);
+    padding: 4px 14px;
+    border-radius: 100px;
+    border: 1px solid rgba(240,237,228,0.06);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    pointer-events: none;
+    letter-spacing: 0.04em;
+  }
+
+  .modal-body { padding: 28px 32px 32px; }
+  .modal-body .modal-num {
+    font-family: "Avenir Next", -apple-system, sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: rgba(251,191,36,0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 4px;
+  }
+  .modal-body h2 {
+    font-size: 1.5rem;
+    color: #f0ede4;
+    margin-bottom: 16px;
+  }
+  .modal-body .modal-setting {
+    font-family: "Avenir Next", -apple-system, sans-serif;
+    font-size: 0.85rem;
+    color: rgba(240,237,228,0.4);
+    margin-bottom: 12px;
+  }
+  .modal-body .modal-section {
+    margin-bottom: 16px;
+  }
+  .modal-body .modal-section h4 {
+    font-family: "Avenir Next", -apple-system, sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #fbbf24;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 6px;
+  }
+  .modal-body .modal-section p {
+    font-size: 0.92rem;
+    color: rgba(240,237,228,0.75);
+    line-height: 1.65;
+  }
+  .modal-close {
+    position: fixed;
+    top: 16px;
+    right: 24px;
+    z-index: 1010;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid rgba(240,237,228,0.15);
+    background: rgba(6,10,20,0.7);
+    color: rgba(240,237,228,0.6);
+    font-size: 1.4rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s ease;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 1011;
+  }
+  .modal-close:hover {
+    color: #f0ede4;
+    border-color: rgba(240,237,228,0.3);
+    background: rgba(255,255,255,0.08);
+  }
+
+  /* ── themes section ── */
+  .themes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  .theme-card {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(240,237,228,0.06);
+    border-radius: 10px;
+    padding: 20px 22px;
+  }
+  .theme-card h3 {
+    font-size: 1rem;
+    color: #fbbf24;
+    margin-bottom: 8px;
+  }
+  .theme-card p, .theme-card li {
+    font-size: 0.85rem;
+    color: rgba(240,237,228,0.65);
+    line-height: 1.6;
+  }
+  .theme-card ul { list-style: none; padding: 0; }
+  .theme-card li {
+    padding: 4px 0;
+    padding-left: 14px;
+    position: relative;
+  }
+  .theme-card li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: rgba(251,191,36,0.3);
+  }
+
+  /* ── footer ── */
+  .footer {
+    text-align: center;
+    padding: 48px 24px;
+    border-top: 1px solid rgba(240,237,228,0.06);
+    font-family: "Avenir Next", -apple-system, sans-serif;
+    font-size: 0.8rem;
+    color: rgba(240,237,228,0.25);
+  }
+
+  /* ── responsive ── */
+  @media (max-width: 600px) {
+    .container { padding: 0 16px; }
+    .section { padding: 40px 0; }
+    .scene-grid { grid-template-columns: 1fr; }
+    .modal-body { padding: 20px; }
+    .themes-grid { grid-template-columns: 1fr; }
+    .modal-overlay { padding: 12px; }
+    .modal-nav-btn { width: 36px; height: 36px; font-size: 1rem; }
+    .modal-close { top: 8px; right: 12px; width: 36px; height: 36px; font-size: 1.2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ HERO ═══ -->
+<header class="hero">
+  <p class="subtitle">A Bedtime Story</p>
+  <h1>The Lantern Keeper</h1>
+  <nav>
+    <a href="#story">The Story</a>
+    <a href="#storyboard">Storyboard</a>
+    <a href="#themes">Visual Themes</a>
+  </nav>
+</header>
+
+<!-- ═══ STORY ═══ -->
+<section id="story" class="section">
+  <div class="container">
+    <div class="section-title"><h2>The Story</h2></div>
+    <div class="story-body">
+      <p>Every evening, Finn pressed his palms flat against the cold glass of his bedroom window and watched Old Man Gareth climb the lighthouse stairs. The house was quiet at this hour — his mother still at the fish market, the fire burned to ash — and the only sounds were the creak of the roof beams settling and the distant clang of the bell buoy rocking on the incoming tide. The tower rose from the rocky point, white stone streaked with salt, its base dark where the spray reached even on the calmest days. The sea sounded different every evening: some nights a gentle lapping like a dog drinking, some nights a crash and roar that shook the ground, and on fog nights a wet hiss that seemed to come from everywhere at once. His mother never looked at the lighthouse. She turned her head when they walked past it, found something in her pocket to examine, let her jaw tighten if anyone mentioned the broken gear. Finn had asked her about it once. She had been gutting mackerel at the table, the blade scraping against the spine, and she had stopped mid-stroke — the knife suspended, the fish half-open. "A part broke," she said. "The size of your thumb." She had not looked at him. She had looked at the fish, the blood on her hands, anything but him. He had watched the muscle in her jaw jump, watched her swallow. Then the knife found its rhythm again, and they never spoke of it. But Finn remembered his father's smell — tar and tobacco, the way it lingered in the hallway after he came home. He remembered the last thing his father said: "Mind your mother, Finn. I'll be home before the tide turns." He remembered the weight of his father's hand on his head, heavy and warm, a hand that had never come back. He could not save his father. But he could make sure the light never went out again.</p>
+
+      <p>He asked to help every week. "You're barely tall enough to reach the lamp," the fishermen told him. Gareth himself — a man with hands like old rope, knuckles swollen, movements slow and certain — would just smile, his beard parting around teeth worn smooth, and shake his head. But Finn noticed: Gareth never told him to stop watching. And sometimes, at the base of the tower, Gareth would pause and look back at Finn's window before going inside. As if he could feel the boy's eyes on him. As if he were waiting for Finn to be ready.</p>
+
+      <p>The morning of the storm, the gulls gathered on the rooftops in absolute silence. Not calling, not fighting — just sitting, watching the sea. The bell buoy rang faster, more desperate. The old fishermen felt it in their knees, the deep ache that came before a hard blow. By midday, the sky had turned the color of a bruise, purple-black and swollen, clouds moving low and fast like they were running from something. The wind came in hard wet gusts that ripped slates from roofs and sent laundry spiraling into the gray air. Finn's ears popped as he ran to bring in the washing, the sheets snapping like sails. His mother stood in the doorway, her hands raw from scrubbing, the knuckles red and cracked. "Come inside," she said. But her eyes were on the lighthouse — on the dark lantern room — and her jaw was tight. She was looking at it. For the first time she could remember, she was looking at the tower. He turned. Old Man Gareth was on the quay, one hand clutching his chest, his face tilted toward the light that was not there. He went down slowly, like a tree falling, and the healer's boy caught him before he hit the stone. They carried him away on a door. His face was the color of wet ash.</p>
+
+      <p>On the <em>Mercy</em>, thirty miles out, a girl named Ellie Thorn held onto the rail and watched the sky turn black. The captain had been at the wheel for fourteen hours, his hands raw, his eyes fixed on the dark horizon. They had lost the topsail — torn off with a sound like a gunshot — and the crew were working the pumps in the hold, where the sea had found a leak. The wind was pushing them toward the rocks. Ellie's father had given her the medicine crates to hold onto, and she held them, her arms wrapped around the wood, her knuckles white. "Watch for the light," the captain had told her. She had been watching for hours. There was no light.</p>
+
+      <p>By nightfall, the village had gathered in the Fox & Gull. The inn sign creaked on its chains overhead, the painted fox worn smooth by decades of salt wind. Inside, the air was thick with woodsmoke and wet wool, fish stew and spilled ale. The fire hissed where rain dripped from oilskins onto the hearth. Shadows crawled up the walls. A dog whined under a table, its claws clicking on the stone. The blacksmith stood with his hands moving in unconscious gestures, turning an imaginary wheel, testing an imaginary chain. "The gears will strip," he said. "The lamp could shatter." The blacksmith who had once walked into a burning stable for a horse was afraid. The innkeeper poured himself a whiskey with a trembling hand. "It's not a job for guessing."</p>
+
+      <p>Finn stood in the corner, pressed against the rough pine wall, his heart hammering in his throat, his wrists, the tips of his fingers. He knew those gears. The wheel needed exactly three rotations — he had counted them, mouthing the numbers in the dark. The chain had to be pulled slow and steady, never jerking, never stopping. The pause before the match — that moment of stillness — that was where Gareth whispered something Finn had never heard. But standing in the inn, his knowledge felt like a story he had told himself. <em>What if the lamp shatters and the ship wrecks and Ellie is out there and the medicine is on that ship and it's my fault?</em> He thought of his father. He thought of his mother's knife stopping. He thought of the sea glass under his bed, green and smooth, given by a girl who had said <em>for luck</em>. He waited for someone else. No one moved. No one spoke. <em>I am just a boy,</em> he thought. <em>So was Gareth, once.</em></p>
+
+      <p>He slipped out while the argument crested, the oak door groaning shut behind him, cutting off warmth and noise like a blade. The rain hit him like a wall — cold, violent, horizontal, tasting of salt and iron. He ran with his head down, his bare feet slipping on the wet cobbles, the sharp edges biting into his soles. At the base of the lighthouse, he stopped. The tower loomed above him, black against a blacker sky, the stars drowned, the sea a chaos of foam and crashing. The bell buoy was ringing frantically, desperate. He looked up at the dark lantern room. The light that hadn't been there for his father. His mother's knife stopping mid-stroke. Ellie on the <em>Mercy</em>, watching a shore she couldn't see. He put his hand on the cold wet stone of the first step. Then he stopped. His foot came back down. He turned. The Fox & Gull glowed yellow through the rain. Shapes moved behind the windows. He could go back. He could be a boy. <em>But the light won't light itself.</em> His father's voice, clear and close, as if he were standing in the rain beside him. He turned back to the stairs.</p>
+
+      <p>The first step was the hardest thing he had ever done. The stairs wound upward in tight spirals, each step worn smooth and slightly concave by decades of feet. The first landing had a small window — the village below, yellow squares of light, the dark shape of the inn like a ship on a dark sea. The second landing showed the ocean, white-capped and heaving, the bell buoy being tossed like a toy. Halfway up, the smell changed — salt and stone gave way to oil and brass and old dust, the smell of a room that has kept its secrets. The wind screamed through hairline cracks in the mortar, a thin high whistle that seemed to come from everywhere at once. The stone vibrated under his hand, the whole tower swaying with each gust. His wet clothes clung to him, heavy and cold as a burial shroud, and his teeth were chattering so hard he bit his tongue — copper and salt, sharp and bright. He wanted to stop. He wanted to sit down on the cold stone and wait. But the light would not light itself. So he kept climbing.</p>
+
+      <p>The door at the top was heavy oak, worn smooth around the iron handle by a hundred years of hands. When he pushed it open, the silence inside was so deep it pressed against his eardrums, swallowing the sound of the storm. The mechanism waited — cold brass valves green with patina, dark glass prisms that caught no light, the great lamp dead and cold. The room smelled of kerosene and old smoke and the particular stillness of high places, a stillness that felt older than he was. His fingers found the familiar grooves on the wheel — the spot where the brass was worn thinner, the slight wobble in the handle that Gareth's hands had made over forty years. He closed his eyes and saw Gareth's hands, saw them turning. <em>One.</em> The wheel resisted, old grease stiff in the joints — he put his whole weight into it, felt it in his shoulders. <em>Two.</em> It gave with a groan, a grinding sound deep in the wall, metal waking after a long sleep. <em>Three.</em> It turned freely, gears engaging with a sound like a key turning in a great lock. He pulled the chain slow and steady — never jerking, never stopping — and felt the shutters click open above him, heard the hiss of gas beginning to flow, a sound like a snake waking in the dark. He took the match from the tin box. His fingers were numb and clumsy. He held it, not yet striking. The pause. This was where Gareth would whisper something. Finn did not know the words, so he said his own. <em>For the ships. For the children. For my father.</em> He struck the match against the stone sill. The flame flared blue, the sharp chemical scent filling his nose, then steadied into gold. He opened the valve. The mantles caught — first a dim orange glow like a dying ember, then a blazing white heat that bloomed, filling the room with sudden brightness. The prisms caught the light — the way light catches in cut crystal — and threw it outward, a long blade of gold cutting across the storm. <em>Tick.</em> The mechanism engaged, the sound of a clock striking the hour. <em>Tick.</em> The lamp rotated. <em>Tick.</em> The beam swept across the water and found the horizon. Finn put his hands on the warm brass and felt it humming — the heartbeat of the lighthouse, alive again. The warmth spread up his arms, into his chest. He was shivering, but the shivering was slowing. The light caught the dust in the air, filled the room with tiny stars. It gleamed on the green patina, turning it to gold. Finn stood in the middle of it and for the first time since his father died, he was not cold.</p>
+
+      <p>On the <em>Mercy</em>, Ellie saw it first — a point of gold on the horizon, small and steady. She thought she was imagining it. But it grew, the beam sweeping toward them, cutting a path through the rain and spray. "Light!" she screamed. "Light! I see it!" The captain turned the wheel. The crew pulled on the lines. The <em>Mercy</em> followed the golden path through the dark. Ellie watched the tower emerge from the storm, the light growing larger, and she thought of the boy with the quiet eyes who had put a piece of sea glass in his pocket and said thank you like he really meant it.</p>
+
+      <p>Finn stayed in the lantern room until he heard footsteps on the stairs. The blacksmith came first, his face pale in the lamplight. Then the healer, still in his apron. Then Finn's mother. She stood in the doorway, not entering at first, just looking at him — a small boy in the middle of all that light. Then she crossed the room and knelt beside him and put her arms around him. Her body was shaking. She pressed her face into his wet hair and held him. Outside the storm was still raging. Inside, the lamp was turning, ticking, filling the room with gold. "Your father would be proud," she whispered. "He would be so proud." Finn did not say anything. He just leaned into her and felt the warmth of the lamp on both of them.</p>
+
+      <p>In the morning, the <em>Mercy</em> rounded the point, her sails in rags, her hull scarred, but alive. Finn watched from the lantern room as she dropped anchor. He watched a small figure with red hair run down the gangplank and crash into her father's arms. He watched the healer close his eyes and hold his daughter. He watched his mother on the quay below, looking up at the tower. She raised her hand — not a wave, just a sign that she saw him. He pressed his palm flat against the cool glass. He was inside the light now.</p>
+
+      <p>Old Man Gareth came three days later, climbing the stairs one at a time, pausing at each landing to catch his breath. When he reached the top, he did not speak. He just stood and looked at the mechanism. Then he ran his fingers over the wheel — the way a man touches a sleeping child, the way a man says goodbye without words. "You found the pause," he said at last. His voice was rough, the words coming slow. "Before the match. You found it yourself." He sat on the worn step, and after a moment Finn sat beside him. "I never had children," Gareth said, his grinding voice softer than Finn had ever heard it. "This tower was my child. I talked to it. I worried about it. I loved it." He looked at Finn. "And now it's yours." He put his hand on Finn's shoulder — the same hand that had turned the wheel ten thousand times, that knew the weight of the chain and the heat of the lamp. "Tomorrow night, you light it alone. I'll be watching."</p>
+
+      <p>And Finn did. That first night alone, standing in the dark with the match in his hand, the pause felt infinite. He felt Gareth watching from the village. He felt his mother watching from the window. He felt his father somewhere out beyond the light. He struck the match. The flame caught. The light bloomed. He put his hands on the warm brass, and he was not afraid.</p>
+
+      <p>The years passed. The sea changed with the seasons — flat and blue in summer, gray and restless in autumn, black and furious in winter, when the cold seeped through the stone and the lamp's warmth was the only comfort in the dark. Finn learned the lighthouse the way you learn a living thing: by listening. The groan of damp gears told him when to oil them. The way the glass hummed in a south wind told him a storm was coming before the horizon showed a sign. He fixed the crack in the mortar that had let the wind whistle through on winter nights. He replaced the mantles every month, their delicate mesh crumbling like old lace between his fingers. He learned the constellations well enough to name them in his sleep — Orion chasing the Bull, the Swan flying south, the North Star fixed and unblinking above them all. On clear nights he would say their names aloud in the dark, just to hear a voice. His mother started looking at the lighthouse. First quick glances, then longer looks, then one evening he looked down from the lantern room and saw her standing at the bedroom window, watching him. She did not press her palms to the glass the way he used to. She just stood there, her hand resting on the sill, and watched the light. Gareth came by once a month, climbing slower each time. "There are ships saved and ships lost," he told Finn one evening. "You carry them both. That's the weight of the light." Finn came to understand what he meant.</p>
+
+      <p>Four winters after the storm, a boy appeared at the base of the tower. He was small — maybe eight years old — with dark hair plastered to his forehead by the rain and the same hungry look in his eyes that Finn remembered having. He stood at the bottom of the stairs, looking up at the dark lantern room, and he did not move. Finn watched him from the top for a long time. Then he walked down. "What's your name?" "Tom. Tom Sparrow." The boy's voice was small but steady. "I want to learn the light." Finn looked at him. The boy did not look away. And Finn smiled — the same smile Gareth had given him, years ago, the smile that meant <em>I see you. I was you. Wait.</em> "You've been watching," Finn said. Tom nodded, his eyes never leaving the tower. "Yes, sir. Every night." Finn put his hand on the boy's shoulder — the same spot where Gareth's hand had been, where his mother's hand had been, an unbroken chain of hands passing the light from one keeper to the next. "Come on, then," he said. "The first lesson is watching."</p>
+
+      <p>That evening, Finn stood at the top of the stairs and watched Tom press his small hands flat against the cold glass of the lantern room, just as Finn himself had pressed his hands against his bedroom window a thousand nights ago. The boy's breath fogged the glass. His eyes were wide. "Does it ever go out?" Tom asked. "Not if I can help it," Finn said. He put his hand on the wheel. The brass was warm from the day's sun. Outside, the sky was fading, the bell buoy ringing somewhere in the dusk. The sea was calm, breathing in and out against the cliffs the same way it had breathed for a thousand years before them. "Watch now," Finn said. And he began to turn the wheel.</p>
+
+      <p>The light caught. It bloomed golden through the dusk, sweeping its long arm across the darkening water. Tom's face lit up from within, his eyes full of gold, his mouth open in wonder. In the village below, an old man with a hand pressed to his chest watched from his window and smiled. On the edge of the quay, a woman with gray-streaked hair stood with her hand raised, watching the light she no longer had to look away from. And somewhere far out on the water, a ship saw the beam and knew which way was home.</p>
+
+      <p>The light kept turning. Steady and true. A promise kept and passed from hand to hand, generation to generation, long after the names of the keepers were forgotten by everyone but the sea.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ STORYBOARD ═══ -->
+<section id="storyboard" class="section" style="background: rgba(255,255,255,0.01);">
+  <div class="container">
+    <div class="section-title"><h2>Storyboard</h2></div>
+    <p style="margin-bottom:28px;color:rgba(240,237,228,0.5);font-size:0.9rem;font-family:'Avenir Next',-apple-system,sans-serif">15 scenes · Click any card to view the full storyboard details</p>
+    <div class="scene-grid" id="sceneGrid"></div>
+  </div>
+</section>
+
+<!-- ═══ THEMES ═══ -->
+<section id="themes" class="section">
+  <div class="container">
+    <div class="section-title"><h2>Visual Themes</h2></div>
+    <div class="themes-grid">
+      <div class="theme-card">
+        <h3>Hands on Glass</h3>
+        <p>The dominant visual metaphor. Scene 1: Finn presses his palms to the bedroom window, watching from outside. Scene 11: Finn presses his palm to the lantern room glass — now inside the light. Scene 15: Tom mirrors Finn's gesture, the cycle renewed. Longing → belonging.</p>
+      </div>
+      <div class="theme-card">
+        <h3>Hands on the Brass Wheel</h3>
+        <p>Knowledge → Mastery → Legacy. Scene 7: Finn's child hands trace the worn grooves. Scene 8: His hands on warm brass, the lamp alive. Scene 12: Gareth's fingers trace a farewell. Scene 15: Finn's hand on the wheel, teaching the next.</p>
+      </div>
+      <div class="theme-card">
+        <h3>Hand on Shoulder</h3>
+        <p>The unbroken chain. Gareth's hand on Finn's shoulder: "This tower was my child. Now it's yours." Finn's hand on Tom's shoulder: "The first lesson is watching."</p>
+      </div>
+      <div class="theme-card">
+        <h3>The Bell Buoy</h3>
+        <p>The anchoring sound — calm at the start, frantic in crisis, peaceful at the end. Present in scenes 1, 2, 5, 6, 9, 13, 15. Its character tracks the emotional arc of the story.</p>
+      </div>
+      <div class="theme-card">
+        <h3>Gold vs. Cold</h3>
+        <p>The color temperature contrast drives every frame. Cold: the storm, dark glass, the dead lamp, the father's absence. Gold: the lamp, the brass, the inn windows, the mother's arms. The climax — "for the first time since his father died, he was not cold."</p>
+      </div>
+      <div class="theme-card">
+        <h3>The Beam of Light</h3>
+        <p>The central image. Finn watches it from outside (Scene 1). Creates it with his own hands (Scene 8). A ship follows it home (Scene 9). His mother watches it, healed (Scene 13). It sweeps out again, endless (Scene 15).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ MODAL ═══ -->
+<div class="modal-overlay" id="modalOverlay">
+  <button class="modal-close" id="modalClose" aria-label="Close">&times;</button>
+  <div class="modal" id="modalContent">
+    <div class="modal-image-area" id="modalImageArea">
+      <img class="modal-img" id="modalImage" src="" alt="">
+      <div class="modal-nav">
+        <button class="modal-nav-btn" id="modalPrev" aria-label="Previous scene">&#8592;</button>
+        <button class="modal-nav-btn" id="modalNext" aria-label="Next scene">&#8594;</button>
+      </div>
+      <div class="modal-counter" id="modalCounter"></div>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="footer">
+  The Lantern Keeper &middot; Story & Storyboard
+</footer>
+
+<script>
+// ── scene data ──
+const scenes = [
+  {
+    id: 1, num: "01", title: "The Watcher",
+    setting: "Finn's bedroom, coastal village. Late dusk, violet-blue sky.",
+    tone: "Melancholy, intimate, curious",
+    image: "scenes/01_the_watcher.png",
+    desc: "A small boy stands at a bedroom window, palms pressed flat against the cold glass, fogging it with his breath. Beyond the window, across a dark stretch of sea, a white lighthouse tower rises from a rocky point. A tiny figure — Old Man Gareth — climbs the spiral stairs. A bell buoy rocks on the tide in the middle distance. The room behind the boy is sparse: a bed, a burnt-down fire, a chair. On the table, a half-gutted fish, a knife resting beside it.",
+    beat: "Establishes Finn's nightly ritual of watching, his longing to be part of the lighthouse. Introduces the wound — father lost at sea when the lighthouse was dark. Mother's trauma shown through her avoidance.",
+    camera: "Static wide shot from behind Finn, looking past him through the window. Slow push-in toward the back of his head as the bell buoy sounds. Cut to: close-up of his hands on the glass. Cut to: his reflection layered over the lighthouse."
+  },
+  {
+    id: 2, num: "02", title: "The Storm Gathers",
+    setting: "Village quay and lighthouse base. Midday, sky purple-black.",
+    tone: "Dread, urgency",
+    image: "scenes/02_the_storm_gathers.png",
+    desc: "Gulls sit silently on rooftops, watching the sea. The bell buoy rings faster, frantic. Wind tears a slate from a roof — it crashes on the cobbles. Laundry spirals into the gray air. Finn's mother stands in a doorway, her hands raw and red. She is looking at the lighthouse for the first time in years. On the wet stone quay, Old Man Gareth staggers, one hand clutching his chest. His face tilts up toward the dark lantern room. He falls slowly, like a tree dropping.",
+    beat: "The catalyst. The storm is both literal and metaphorical. Gareth's collapse forces the village to confront what none of them know. Mother's first look at the lighthouse signals her own healing beginning.",
+    camera: "Quick cuts. CU of a gull, head cocked. CU of the bell buoy rocking violently. Wide shot of the darkening sky. CU of mother's face — jaw tight, eyes on the tower she's avoided for years."
+  },
+  {
+    id: 3, num: "03", title: "The Mercy",
+    setting: "Deck of the Mercy, thirty miles out at sea. Night falling.",
+    tone: "Desperation, isolation",
+    image: "scenes/03_the_mercy.png",
+    desc: "The ship is thrown by waves that tower above the mast. Rain comes horizontally. The topsail has torn off — a shredded remnant whipping in the rigging. The captain is lashed to the wheel, his hands raw and bleeding. Below deck, a girl of about Finn's age, Ellie Thorn, is braced against wooden crates marked with the healer's cross — medicine. Her knuckles are white. Her eyes are fixed on the dark horizon. She has been watching for hours. There is no light.",
+    beat: "Parallel action. While the village panics, the ship is in genuine peril. Ellie's presence humanizes the stakes — she's the girl who gave Finn a piece of sea glass.",
+    camera: "Low angle from deck looking up at the captain, rain streaking the lens. Wide shot of the wave rising. CU of Ellie's hands gripping the crate. CU of the dark horizon — nothing."
+  },
+  {
+    id: 4, num: "04", title: "The Fox & Gull",
+    setting: "Interior of the village inn. Night, storm pounding the roof.",
+    tone: "Claustrophobic, fearful",
+    image: "scenes/04_the_fox_and_gull.png",
+    desc: "The inn is packed with villagers in oilskins dripping onto the stone floor where water hisses and steams against the hearth. The fire throws long shadows. A dog whines under a table. The blacksmith stands with his hands moving unconsciously — turning an imaginary wheel. 'The gears will strip,' he says. 'The lamp could shatter.' The innkeeper pours whiskey with a trembling hand. In the corner, Finn watches, his heart visible in the pulse at his throat.",
+    beat: "The village's fear crystallizes around one problem — no one knows the lighthouse. Finn's internal debate: he knows the mechanism but is afraid of the cost of being wrong.",
+    camera: "Steadicam moving through the crowd. Slow orbit around Finn in the corner, isolating him from the noise. Flash frames of the knife stopping, the sea glass, Gareth's hands turning the wheel."
+  },
+  {
+    id: 5, num: "05", title: "The Choice",
+    setting: "Outside the inn, base of the lighthouse. Storm at full force.",
+    tone: "Crisis, turning point",
+    image: "scenes/05_the_choice.png",
+    desc: "The inn door groans shut behind Finn. The rain hits him like a wall. He runs, bare feet on wet cobbles. At the lighthouse base, he stops. The tower looms, black against black. He looks up at the dark lantern room. He puts his hand on the cold wet stone of the first step. Then stops. Turns. The Fox & Gull glows yellow through the rain. He can go back. Then — his father's voice: 'But the light won't light itself.' He turns back to the stairs.",
+    beat: "The turning point. Finn's hand on the cold stone is the physical manifestation of his decision. The heart of his arc.",
+    camera: "Extreme wide shot — small boy, massive tower. CU of his hand on wet stone. CU of his face, rain streaming. CU of his foot stepping onto the first stair."
+  },
+  {
+    id: 6, num: "06", title: "The Climb",
+    setting: "Spiral staircase inside the lighthouse. Dark, narrow, stone.",
+    tone: "Physical ordeal, rising tension",
+    image: "scenes/06_the_climb.png",
+    desc: "Finn climbs. The stairs wind in tight spirals, each step worn smooth by decades of feet. The first landing shows the village below, tiny yellow squares. The second shows the ocean, white-capped, the bell buoy tossed like a toy. Halfway up, the smell changes — salt and stone give way to oil and brass and old dust. The wind screams through cracks in the mortar. The stone vibrates under his hand. He bites his tongue — copper and salt. He wants to stop. He keeps climbing.",
+    beat: "The physical ordeal mirrors his internal journey. The changing smell signals he is entering a different world — the domain of the mechanism.",
+    camera: "Low angle up the spiral stairs. CU of his hand on the worn stone. CU of his wet bare feet on concave steps. Each landing as a brief pause."
+  },
+  {
+    id: 7, num: "07", title: "The Mechanism",
+    setting: "The lantern room. Night. Absolute silence.",
+    tone: "Reverent, mechanical, silent",
+    image: "scenes/07_the_mechanism.png",
+    desc: "The heavy oak door swings open into a silence so deep it presses against the ears. The mechanism waits — brass valves green with patina, dark glass prisms, a great lamp dead and cold. Finn crosses to the wheel, his fingers finding the familiar grooves. Forty years of Gareth's hands have shaped this metal. He closes his eyes, sees Gareth's hands. He begins to turn. One — the wheel resists. Two — it gives with a groan. Three — it turns freely, gears engaging. The shutters click open. Gas hisses.",
+    beat: "Finn's knowledge, built through watching, becomes action. The room is a cathedral of brass and glass.",
+    camera: "Slow push-in through the doorway. CU of the brass wheel. CU of Finn's fingers tracing the wear marks. Slow-motion: the wheel turning, the chain pulling."
+  },
+  {
+    id: 8, num: "08", title: "The Light",
+    setting: "The lantern room. Same moment, continuing.",
+    tone: "Triumph, warmth, transcendence",
+    image: "scenes/08_the_light.png",
+    desc: "Finn takes the match from the tin box. Holds it — not yet striking. The pause. He whispers his own words: 'For the ships. For the children. For my father.' He strikes. Blue flame, then gold. The mantles catch — dim orange, then blazing white. The prisms throw the light outward, a blade of gold across the storm. Tick. The mechanism engages. Tick. The lamp rotates. Tick. The beam finds the horizon. Finn puts his hands on the warm brass — the heartbeat of the lighthouse, alive again. The light catches dust in the air, filling the room with tiny stars. For the first time since his father died, he is not cold.",
+    beat: "The climax. Finn's transformation made manifest in light. The thing his father didn't have, Finn now provides for others.",
+    camera: "CU of the match striking. CU of Finn's face as the light blooms. Slow-motion: the mantles catching. Camera pulls back as the beam shoots outward."
+  },
+  {
+    id: 9, num: "09", title: "The Sight",
+    setting: "Deck of the Mercy. Storm still raging.",
+    tone: "Hope, relief",
+    image: "scenes/09_the_sight.png",
+    desc: "Ellie is braced against the crates, her eyes on the horizon. Then — a point of gold. Small. Steady. The beam sweeps toward them, cutting a path through the rain and spray. 'Light!' she screams. The captain turns the wheel. The crew pulls on the lines. The Mercy follows the golden path through the dark. Ellie thinks of the boy with the quiet eyes who put a piece of sea glass in his pocket and said thank you like he meant it.",
+    beat: "The consequence of Finn's choice. The light saves them. Ellie's recognition makes it personal.",
+    camera: "CU of Ellie's face — then the reflection of the light appears in her eyes. High angle: the beam of gold cutting across the dark water like a road."
+  },
+  {
+    id: 10, num: "10", title: "The Embrace",
+    setting: "The lantern room. Storm muffled, distant.",
+    tone: "Tenderness, healing",
+    image: "scenes/10_the_embrace.png",
+    desc: "Footsteps on the stairs. The blacksmith enters. The healer. Then Finn's mother. She stands in the doorway, looking at Finn — a small boy in the middle of all that light. She crosses the room, kneels, wraps her arms around him. Her body shakes. She presses her face into his wet hair. 'Your father would be proud,' she whispers. 'He would be so proud.' Outside, the storm rages. Inside, the lamp turns, fills the room with gold.",
+    beat: "The emotional resolution of the mother's arc. She entered the lighthouse. She touched her son inside the light. She is healing.",
+    camera: "Shot through the doorway — mother's silhouette against the light. Slow push-in. CU of her hands around him. High angle looking down — two figures in a circle of gold."
+  },
+  {
+    id: 11, num: "11", title: "The Dawn",
+    setting: "The quay and lighthouse. Morning after the storm.",
+    tone: "Restoration, new day",
+    image: "scenes/11_the_dawn.png",
+    desc: "The storm has passed. The sea is flat and gray. The Mercy rounds the point — her sails in rags, her hull scarred, but alive. A small figure with red hair runs down the gangplank into her father's arms. On the quay, Finn's mother looks up at the tower. She raises her hand. Finn presses his palm flat against the cool glass. He is inside the light now.",
+    beat: "Ellie is safe. The mother looks at the lighthouse freely. Finn's position inside the light completes his transformation from watcher to keeper.",
+    camera: "Wide shot of the Mercy rounding the point. Slow-motion: Ellie running. CU of mother raising her hand. CU of Finn through the glass — palm pressed flat, the same gesture as Scene 1."
+  },
+  {
+    id: 12, num: "12", title: "The Inheritance",
+    setting: "The lantern room. Clear daylight.",
+    tone: "Passing, bittersweet",
+    image: "scenes/12_the_inheritance.png",
+    desc: "Old Man Gareth climbs the stairs, pausing at each landing. At the top, he runs his fingers over the wheel — the way a man touches a sleeping child. 'You found the pause,' he says. They sit together on the worn step. 'I never had children,' Gareth says. 'This tower was my child. I talked to it. I worried about it. I loved it.' He looks at Finn. 'And now it's yours.' He puts his hand on Finn's shoulder. 'Tomorrow night, you light it alone. I'll be watching.'",
+    beat: "The formal passing of responsibility. Gareth's confession is the deepest intimacy he has shown. Finn's silent acceptance is his maturation.",
+    camera: "Medium two-shot on the step. CU of Gareth's hand on the wheel. CU of Finn's face — he is no longer a boy in this moment."
+  },
+  {
+    id: 13, num: "13", title: "The Years",
+    setting: "Lighthouse and village across four seasons. Montage.",
+    tone: "Montage, growth, time",
+    image: "scenes/13a_winter.png",
+    panels: ["scenes/13a_winter.png", "scenes/13b_spring.png", "scenes/13c_mother_watching.png"],
+    panelLabels: ["Winter — Finn alone in the lantern room, hands on warm brass, snow against the glass.", "Spring — Finn oils the gears, confident and practiced, sunlight through the prisms.", "Evening — His mother stands at the bedroom window where he used to stand, watching the light."],
+    desc: "A sequence over four years. Winter: Finn alone, snow against the glass, his hands on the warm brass. Spring: oiling the gears, his hands confident and practiced. Autumn: fixing the crack in the mortar. Winter again: replacing a mantle, the mesh crumbling like old lace. Evening: Finn looks down and sees his mother at the bedroom window — the same window where he used to stand, her hand on the sill, watching the light.",
+    beat: "Finn grows into his role. The lighthouse becomes a relationship. His mother's healing shown through her watching — she has taken his former position at the window.",
+    camera: "Match cuts: Finn's hands as a boy on glass → Finn's hands as a young man on brass → mother's hand on the windowsill."
+  },
+  {
+    id: 14, num: "14", title: "The Apprentice",
+    setting: "Base of the lighthouse tower. Rainy evening.",
+    tone: "Recognition, cycle",
+    image: "scenes/14_the_apprentice.png",
+    desc: "A boy — maybe eight, dark hair plastered by the rain — stands at the base of the tower, looking up. He has the same hungry look Finn remembers having. Finn walks down. 'What's your name?' 'Tom. Tom Sparrow. I want to learn the light.' Finn smiles — the same smile Gareth gave him. 'You've been watching,' Finn says. He puts his hand on the boy's shoulder. 'Come on, then. The first lesson is watching.'",
+    beat: "The cycle continues. Finn becomes Gareth. Tom becomes Finn. The watcher at the base, the keeper at the top — a deliberate echo of the opening.",
+    camera: "High angle looking down at Tom. Reverse: low angle looking up at Finn. CU of Finn's hand on Tom's shoulder — matching Gareth's hand on Finn's shoulder."
+  },
+  {
+    id: 15, num: "15", title: "The Cycle",
+    setting: "The lantern room. Dusk — same time as Scene 1.",
+    tone: "Completion, eternal return",
+    image: "scenes/15a_the_cycle_echo.png",
+    panels: ["scenes/15a_the_cycle_echo.png", "scenes/15b_the_cycle_wide.png"],
+    panelLabels: ["The echo — Tom at the glass, hands pressed flat, the identical gesture that opened the story, but now inside the light.", "The final wide — the lighthouse at dusk, its beam sweeping, Gareth watching from his window, mother on the quay, a ship far out on the water."],
+    desc: "Finn watches Tom press his small hands flat against the cold glass — the same gesture Finn made a thousand nights ago. 'Does it ever go out?' Tom asks. 'Not if I can help it.' Finn turns the wheel. The light blooms golden. Tom's face lights up from within. In the village below, an old man watches from his window and smiles. On the quay, a woman with gray-streaked hair stands with her hand raised. Somewhere far out, a ship sees the beam and knows which way is home.",
+    beat: "Every character present in the final moment. The light endures. The story will continue after the telling ends.",
+    camera: "Match cut to Scene 1: Tom's hands on glass = Finn's hands on glass. Pull back to reveal Finn at the wheel. Intercut: Gareth smiling, mother's raised hand, the beam reaching the ship. Final shot: the lighthouse at dusk, the beam sweeping. Fade to black."
+  }
+];
+
+// ── render cards ──
+const grid = document.getElementById("sceneGrid");
+scenes.forEach(s => {
+  const card = document.createElement("div");
+  card.className = "scene-card";
+  card.onclick = () => openModal(s.id);
+  const imgSrc = s.panels ? s.panels[0] : s.image;
+  card.innerHTML = `
+    <div class="card-thumb"><img src="${imgSrc}" alt="${s.title}" loading="lazy"></div>
+    <div class="card-body">
+      <div class="card-num">Scene ${s.num}</div>
+      <h3>${s.title}</h3>
+      <div class="card-meta">
+        <span>${s.tone.split(",")[0].trim()}</span>
+        <span>${s.setting.match(/^[^.]+/)[0]}</span>
+      </div>
+    </div>
+  `;
+  grid.appendChild(card);
+});
+
+// ── modal state ──
+let currentSceneId = null;
+const totalScenes = scenes.length;
+
+const overlay = document.getElementById("modalOverlay");
+const closeBtn = document.getElementById("modalClose");
+const modalImage = document.getElementById("modalImage");
+const modalCounter = document.getElementById("modalCounter");
+const modalBody = document.getElementById("modalBody");
+const prevBtn = document.getElementById("modalPrev");
+const nextBtn = document.getElementById("modalNext");
+
+function renderScene(id, direction) {
+  const s = scenes.find(x => x.id === id);
+  if (!s) return;
+
+  const index = scenes.indexOf(s);
+
+  // counter
+  modalCounter.textContent = `${s.num} of ${String(totalScenes).padStart(2, "0")}`;
+
+  // image — crossfade on nav, instant on open
+  const newSrc = s.panels ? s.panels[0] : s.image;
+  if (direction) {
+    modalImage.classList.add("fade-out");
+    setTimeout(() => {
+      modalImage.src = newSrc;
+      modalImage.alt = s.title;
+      modalImage.classList.remove("fade-out");
+    }, 150);
+  } else {
+    modalImage.classList.remove("fade-out");
+    modalImage.src = newSrc;
+    modalImage.alt = s.title;
+  }
+
+  // body
+  modalBody.innerHTML = `
+    <div class="modal-num">Scene ${s.num}</div>
+    <h2>${s.title}</h2>
+    <div class="modal-setting">${s.setting}</div>
+    <div class="modal-section">
+      <h4>Visual Description</h4>
+      <p>${s.desc}</p>
+    </div>
+    <div class="modal-section">
+      <h4>Key Narrative Beat</h4>
+      <p>${s.beat}</p>
+    </div>
+    <div class="modal-section">
+      <h4>Camera Direction</h4>
+      <p>${s.camera}</p>
+    </div>
+  `;
+
+  // remove any existing panel inserts from a previous scene
+  document.querySelectorAll(".modal-panel-insert").forEach(el => el.remove());
+
+  // append extra panels below body
+  if (s.panels) {
+    s.panels.forEach((src, i) => {
+      if (i === 0) return; // first panel already shown in modalImage
+      const insert = document.createElement("div");
+      insert.className = "modal-panel-insert";
+      insert.style.cssText = "border-top:1px solid rgba(240,237,228,0.06)";
+      insert.innerHTML = `
+        <img class="modal-img" src="${src}" alt="${s.title} panel ${i+1}" loading="lazy">
+        <div style="padding:8px 32px 16px;font-size:0.8rem;color:rgba(240,237,228,0.4);font-family:'Avenir Next',-apple-system,sans-serif;text-align:center">${s.panelLabels[i]}</div>
+      `;
+      modalBody.parentNode.appendChild(insert);
+    });
+  }
+}
+
+function navigateScene(delta) {
+  const current = scenes.findIndex(s => s.id === currentSceneId);
+  if (current === -1) return;
+  // wrap around
+  const next = ((current + delta) % totalScenes + totalScenes) % totalScenes;
+  currentSceneId = scenes[next].id;
+  renderScene(currentSceneId, delta);
+}
+
+function openModal(id) {
+  currentSceneId = id;
+  renderScene(id, 0);
+  overlay.classList.add("active");
+  document.body.style.overflow = "hidden";
+}
+
+function closeModal() {
+  overlay.classList.remove("active");
+  document.body.style.overflow = "";
+}
+
+// ── event wiring ──
+closeBtn.onclick = closeModal;
+prevBtn.onclick = () => navigateScene(-1);
+nextBtn.onclick = () => navigateScene(1);
+overlay.onclick = (e) => { if (e.target === overlay) closeModal(); };
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") { closeModal(); return; }
+  if (!overlay.classList.contains("active")) return;
+  if (e.key === "ArrowLeft" || e.key === "ArrowUp") { e.preventDefault(); navigateScene(-1); }
+  if (e.key === "ArrowRight" || e.key === "ArrowDown") { e.preventDefault(); navigateScene(1); }
+});
+</script>
+
+</body>
+</html>
